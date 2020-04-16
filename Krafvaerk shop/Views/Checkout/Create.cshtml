@@ -1,0 +1,112 @@
+﻿@model Krafvaerk_shop.Models.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Checkout</h1>
+<hr />
+@if (Model.Products.Any())
+{
+    <div class="row">
+        <form asp-action="Order" style="width:100%;">
+            @Html.HiddenFor(x => x.ShoppingCartId)
+            <div class="col-sm-12">
+                <h4>Your order</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(x => x.Products.First().Name)</th>
+                            <th>@Html.DisplayNameFor(x => x.Products.First().Quantity)</th>
+                            <th>@Html.DisplayNameFor(x => x.Products.First().Price)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int p = 0; p < Model.Products.Count; p++)
+                        {
+                            @Html.HiddenFor(x => x.Products[p].Id);
+                            @Html.HiddenFor(x => x.Products[p].Name);
+                            @Html.HiddenFor(x => x.Products[p].Price);
+                            @Html.HiddenFor(x => x.Products[p].Quantity);
+
+                            <tr>
+                                <td>@Html.DisplayFor(Model => Model.Products[p].Name)</td>
+                                <td>@Html.DisplayFor(Model => Model.Products[p].Quantity)</td>
+                                <td>@Html.DisplayFor(Model => Model.Products[p].Price) &euro;</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="2">@Html.DisplayNameFor(x => x.TotalPrice)</th>
+                            <td>
+                                @Html.DisplayFor(x => x.TotalPrice) &euro;
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <hr class="col-md-12" />
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="User.FirstName" class="control-label"></label>
+                    <input placeholder="Enter Firstname" asp-for="User.FirstName" class="form-control" />
+                    <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="User.LastName" class="control-label"></label>
+                    <input placeholder="Enter Lastname" asp-for="User.LastName" class="form-control" />
+                    <span asp-validation-for="User.LastName" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="User.Country" class="control-label"></label>
+                    <input placeholder="Enter country" asp-for="User.Country" class="form-control" />
+                    <span asp-validation-for="User.Country" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="User.Address" class="control-label"></label>
+                    <input placeholder="Enter address" asp-for="User.Address" class="form-control" />
+                    <span asp-validation-for="User.Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label asp-for="User.PostCode" class="control-label"></label>
+                    <input placeholder="Enter postcode" asp-for="User.PostCode" class="form-control" />
+                    <span asp-validation-for="User.PostCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-md-6">
+                    <label asp-for="User.PhoneNumber" class="control-label"></label>
+                    <input placeholder="+35840123123" asp-for="User.PhoneNumber" class="form-control" />
+                    <span asp-validation-for="User.PhoneNumber" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label asp-for="User.Email" class="control-label"></label>
+                    <input placeholder="Enter email" asp-for="User.Email" class="form-control" />
+                    <span asp-validation-for="User.Email" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" asp-controller="Checkout" asp-action="Create" value="Submit order" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+}
+else
+{
+    <div class="row">
+        <p>No products in cart</p>
+    </div>
+}
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

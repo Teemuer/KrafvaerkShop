@@ -1,0 +1,32 @@
+﻿@model Krafvaerk_shop.Models.PageProduct
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h1>Product details</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.Name)</h4>
+    <hr />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="@Model.ImageUri" class="img-fluid col-sm-6" />
+            </div>
+            <div class="col-sm-6 container">
+                <h5>@Html.DisplayNameFor(model => model.Description)</h5>
+                <p>@Html.DisplayFor(model => model.Description)</p>
+
+                <h5>
+                    @Html.DisplayNameFor(model => model.Price)
+                </h5>
+                <p>@Html.DisplayFor(model => model.Price)</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <button class="btn btn-primary m-md-4 m-sm-2 add-to-cart" onclick="ShoppingCart.SetProductToCart(@Model.Id);">Add To Cart</button>
+    <a class="btn btn-primary m-md-4 m-sm-2" asp-action="List">Go To Product List</a>
+</div>

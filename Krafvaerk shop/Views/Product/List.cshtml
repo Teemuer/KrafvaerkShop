@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Krafvaerk_shop.Models.PageProduct>
+
+@{
+    ViewData["Title"] = "ProductList";
+}
+
+<h1>Products</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+            <th colspan="2">
+                @Html.DisplayNameFor(model => model.Price)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Any())
+        {
+            @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                <a class="btn btn-primary m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <button class="btn btn-primary m-sm-1 add-to-cart" onclick="ShoppingCart.SetProductToCart(@item.Id, 1);">Add to cart</button>
+            </td>
+        </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td>
+                    Ei löytynyt tuotteita :(
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
