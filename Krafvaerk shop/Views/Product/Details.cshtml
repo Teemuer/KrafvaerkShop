@@ -27,6 +27,6 @@
     </div>
 </div>
 <div>
-    <button class="btn btn-primary m-md-4 m-sm-2 add-to-cart" onclick="ShoppingCart.SetProductToCart(@Model.Id);">Add To Cart</button>
-    <a class="btn btn-primary m-md-4 m-sm-2" asp-action="List">Go To Product List</a>
+    <a class="btn btn-secondary m-md-4 m-sm-2" asp-action="List">Go To Product List</a>
+    <button class="btn btn-primary m-md-4 m-sm-2 add-to-cart" onclick="ShoppingCart.SetProductToCart(@Model.Id, 1);">Add To Cart</button>
 </div>

@@ -33,10 +33,10 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Price)&euro;
             </td>
             <td>
-                <a class="btn btn-primary m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
+                <a class="btn btn-secondary m-sm-1" asp-action="Details" asp-route-id="@item.Id">Details</a>
                 <button class="btn btn-primary m-sm-1 add-to-cart" onclick="ShoppingCart.SetProductToCart(@item.Id, 1);">Add to cart</button>
             </td>
         </tr>
